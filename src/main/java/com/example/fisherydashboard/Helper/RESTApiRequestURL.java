@@ -5,5 +5,6 @@ public class RESTApiRequestURL {
     public static final String GET_TYPEOFFISHLIST = "http://localhost:8080/fishery/retrieveTypeOfFish";
     public static final String GET_MEMBERS = "http://localhost:8080/fishery/getMembers";
     public static final String GET_COUNTRYSETTINGS = "http://localhost:8080/fishery/getCountrySettings";
+    public static final String POST_COUNTRYSETTINGS = "http://localhost:8080/fishery/createMember";
 
 }

@@ -11,11 +11,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -81,24 +83,98 @@ public class HelloController {
     @FXML
     private PieChart pieChart;
 
+    @FXML
+    private Button btnReloadData;
+
+    @FXML
+    private Button btnRegister;
+
     RestApiCallServiceImpl restApiCallService = new RestApiCallServiceImpl();
     List<TypeOfFish> typeOfFishDataList = new ArrayList<>();
     List<HarvestedFishRecords> harvestedFishRecordDataList = new ArrayList<>();
     List<CountrySetting> countrySettingDataList = new ArrayList<>();
     List<Members> membersDataList = new ArrayList<>();
 
+    CountrySetting currentSelectedCountrySetting;
+
+
     @FXML
     public void initialize() {
+        btnReloadData.setOnAction(a -> onCreated());
+        btnRegister.setOnAction(a -> showStage());
+        onCreated();
+    }
+    private void onCreated() {
         loadRestAPIData();
         initListViewData();
-        lvCountry.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                CountrySetting countrySetting = (CountrySetting) lvCountry.getSelectionModel().getSelectedItem();
-                System.out.println("clicked on " + countrySetting.getCountry());
-                initData(countrySetting);
-            }
+        lvCountry.setOnMouseClicked(event -> {
+            CountrySetting countrySetting = (CountrySetting) lvCountry.getSelectionModel().getSelectedItem();
+            System.out.println("clicked on " + countrySetting.getCountry());
+            currentSelectedCountrySetting = countrySetting;
+            initData(countrySetting);
         });
+    }
+
+    private void showStage() {
+        Stage newStage = new Stage();
+        VBox comp = new VBox();
+        comp.setAlignment(Pos.CENTER);
+        Label lblUsername = new Label("Username");
+        Label lblFirstName = new Label("First Name");
+        Label lblLastName = new Label("Last Name");
+        Label lblPassword = new Label("Password");
+        Label warning = new Label();
+        TextField txtUsername = new TextField();
+        TextField txtFirstName = new TextField();
+        TextField txtLastName = new TextField();
+        PasswordField txtPassword = new PasswordField();
+        Button buttonRegister = new Button("Register");
+
+        comp.getChildren().add(lblUsername);
+        comp.getChildren().add(txtUsername);
+        comp.getChildren().add(lblFirstName);
+        comp.getChildren().add(txtFirstName);
+        comp.getChildren().add(lblLastName);
+        comp.getChildren().add(txtLastName);
+        comp.getChildren().add(lblPassword);
+        comp.getChildren().add(txtPassword);
+        comp.getChildren().add(warning);
+        comp.getChildren().add(buttonRegister);
+
+
+
+        buttonRegister.setOnAction(a -> {
+            if (Objects.isNull(txtUsername.getText()) || txtUsername.getText().isBlank()) {
+                warning.setText("Please fill in your username");
+            } else if (Objects.isNull(txtFirstName.getText()) || txtFirstName.getText().isBlank()) {
+                warning.setText("Please fill in your first name");
+            } else if (Objects.isNull(txtLastName.getText()) || txtLastName.getText().isBlank()) {
+                warning.setText("Please fill in your last name");
+            } else if (Objects.isNull(txtPassword.getText()) || txtPassword.getText().isBlank()) {
+                warning.setText("Please fill in your password");
+            } else {
+                warning.setText("");
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("username", txtUsername.getText());
+                jsonObject.put("firstName", txtFirstName.getText());
+                jsonObject.put("lastName", txtLastName.getText());
+                jsonObject.put("password", txtPassword.getText());
+
+                JSONObject returnJsonObject = restApiCallService.sendPostRequest(POST_COUNTRYSETTINGS, jsonObject);
+                if ("208".equals(returnJsonObject.get("code").toString())) {
+                    warning.setText("Please enter another username");
+                } else if ("201".equals(returnJsonObject.get("code").toString())) {
+                    newStage.close();
+                } else {
+                    warning.setText("Network issue, please try again!");
+                }
+            }
+
+        });
+
+        Scene stageScene = new Scene(comp, 300, 250);
+        newStage.setScene(stageScene);
+        newStage.show();
     }
 
     private void initData(CountrySetting countrySetting) {
@@ -154,7 +230,9 @@ public class HelloController {
                 }
             });
         }
-
+        if (!pieChart.getData().isEmpty()) {
+            handlePieChartClick(pieChart.getData().get(0).getName(), currentCountryHarvest);
+        }
         OptionalDouble thAverage =
                 Arrays.asList(countrySetting.getThreshHoldNorthEast(), countrySetting.getThreshHoldNorthWest(),
                         countrySetting.getThreshHoldSouthEast(), countrySetting.getThreshHoldSouthWest()).stream()
@@ -208,6 +286,7 @@ public class HelloController {
         top5MembersId.forEach(fe -> membersDataList.stream()
                 .filter(f -> f.getMemberId().equals(fe)).findFirst()
                 .ifPresent(p -> top5memberNames.add(p.getFirstName() + " " + p.getLastName() + " - Total weight harvested: " + top5Members.get(fe).getSum())));
+        lvTop5Members.getItems().clear();
         lvTop5Members.getItems().addAll(top5memberNames);
     }
 
@@ -246,8 +325,13 @@ public class HelloController {
     }
 
     private void initListViewData() {
-
+        lvCountry.getItems().clear();
         lvCountry.getItems().addAll(countrySettingDataList);
+        if (Objects.nonNull(currentSelectedCountrySetting)) {
+            initData(currentSelectedCountrySetting);
+        } else if (!countrySettingDataList.isEmpty()) {
+            initData(countrySettingDataList.get(0));
+        }
         lvCountry.setCellFactory(param -> new ListCell<CountrySetting>() {
             @Override
             protected void updateItem(CountrySetting item, boolean empty) {
@@ -263,7 +347,10 @@ public class HelloController {
     }
 
     private void loadRestAPIData() {
-
+        membersDataList.clear();
+        countrySettingDataList.clear();
+        harvestedFishRecordDataList.clear();
+        typeOfFishDataList.clear();
         try {
             JSONObject jsonObjectHarvestedFishRecords = restApiCallService.sendGetRequest(GET_HARVESTEDFISHRECORDS, null);
             JSONObject jsonObjectTypeOfFish = restApiCallService.sendGetRequest(GET_TYPEOFFISHLIST, null);
@@ -355,7 +442,7 @@ public class HelloController {
                     countrySetting.setTotalWeightFished(totalWeightFished);
                     countrySettingDataList.add(countrySetting);
                 });
-                countrySettingDataList.stream().sorted();
+                countrySettingDataList.stream().sorted(Comparator.comparing(CountrySetting::getTotalWeightFished));
                 Collections.reverse(countrySettingDataList);
             }
         } catch (Exception ignore) {
