@@ -44,7 +44,7 @@
                               <VBox fx:id="iv1" alignment="CENTER" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
                                  <children>
                                     <Label text="North West" />
-                                    <Label fx:id="lblhmNW"/>
+                                    <Label fx:id="lblhmNW" />
                                  </children></VBox>
                               <VBox fx:id="iv2" alignment="CENTER" layoutX="10.0" layoutY="10.0" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
                                  <children>
@@ -62,7 +62,7 @@
                                  </children></VBox>
                               <VBox fx:id="iv4" alignment="CENTER" layoutX="10.0" layoutY="10.0" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
                                  <children>
-                                    <Label  text="South East"/>
+                                    <Label text="South East" />
                                     <Label fx:id="lblhmSE" />
                                  </children></VBox>
                            </children>
@@ -75,7 +75,7 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox prefHeight="124.0" prefWidth="100.0" spacing="5.0">
+                        <VBox maxHeight="250.0" minHeight="250.0" prefHeight="250.0" prefWidth="250.0" spacing="5.0">
                            <children>
                               <Label text="Total weight harvested in each region:">
                                  <font>
@@ -127,7 +127,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox prefHeight="124.0" prefWidth="100.0" spacing="5.0">
+                        <VBox maxHeight="250.0" minHeight="250.0" prefHeight="250.0" prefWidth="250.0" spacing="5.0">
                            <children>
                               <Label text="Most harvested fish specie:">
                                  <font>
@@ -136,7 +136,7 @@
                               </Label>
                               <HBox>
                                  <children>
-                                    <PieChart fx:id="pieChart" prefWidth="168.0" />
+                                    <PieChart fx:id="pieChart" prefHeight="400.0" prefWidth="400"/>
                                  </children>
                               </HBox>
                            </children>
@@ -178,7 +178,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="170.0" prefWidth="100.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                        <VBox maxHeight="250.0" minHeight="250.0" prefHeight="250.0" prefWidth="250.0" spacing="5.0">
                            <children>
                               <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="16.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                                  <children>

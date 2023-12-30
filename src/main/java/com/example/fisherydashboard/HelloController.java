@@ -252,7 +252,10 @@ public class HelloController {
 
 
         pieChart.setData(pieChartData);
-
+        pieChart.setClockwise(true);
+        pieChart.setLabelLineLength(10);
+        pieChart.setLabelsVisible(true);
+        pieChart.setStartAngle(360);
         for(PieChart.Data data : pieChart.getData()) {
             data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
