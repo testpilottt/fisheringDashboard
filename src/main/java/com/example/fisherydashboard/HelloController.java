@@ -7,20 +7,31 @@ import com.example.fisherydashboard.dto.TypeOfFish;
 import com.example.fisherydashboard.enums.Country;
 import com.example.fisherydashboard.enums.Region;
 import com.example.fisherydashboard.service.RestApiCallServiceImpl;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.effect.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Function;
@@ -75,6 +86,18 @@ public class HelloController {
     private Label lblC5SW;
 
     @FXML
+    private Label lblhmNW;
+
+    @FXML
+    private Label lblhmNE;
+
+    @FXML
+    private Label lblhmSW;
+
+    @FXML
+    private Label lblhmSE;
+
+    @FXML
     private Label lblC3FishName;
 
     @FXML
@@ -89,6 +112,14 @@ public class HelloController {
     @FXML
     private Button btnRegister;
 
+    @FXML
+    private VBox iv1;
+    @FXML
+    private VBox iv2;
+    @FXML
+    private VBox iv3;
+    @FXML
+    private VBox iv4;
     RestApiCallServiceImpl restApiCallService = new RestApiCallServiceImpl();
     List<TypeOfFish> typeOfFishDataList = new ArrayList<>();
     List<HarvestedFishRecords> harvestedFishRecordDataList = new ArrayList<>();
@@ -107,9 +138,9 @@ public class HelloController {
     private void onCreated() {
         loadRestAPIData();
         initListViewData();
+
         lvCountry.setOnMouseClicked(event -> {
             CountrySetting countrySetting = (CountrySetting) lvCountry.getSelectionModel().getSelectedItem();
-            System.out.println("clicked on " + countrySetting.getCountry());
             currentSelectedCountrySetting = countrySetting;
             initData(countrySetting);
         });
@@ -288,6 +319,66 @@ public class HelloController {
                 .ifPresent(p -> top5memberNames.add(p.getFirstName() + " " + p.getLastName() + " - Total weight harvested: " + top5Members.get(fe).getSum())));
         lvTop5Members.getItems().clear();
         lvTop5Members.getItems().addAll(top5memberNames);
+
+        Double percentageNE = (NE_TH / NE) * 100;
+        Double percentageNW = (NW_TH / NW) * 100;
+        Double percentageSE = (SE_TH / SE) * 100;
+        Double percentageSW = (SW_TH / SW) * 100;
+        lblhmNW.setText(percentageNW + "%");
+        lblhmNE.setText(percentageNE + "%");
+        lblhmSW.setText(percentageSW + "%");
+        lblhmSE.setText(percentageSE + "%");
+        if (percentageNW < 20) {
+            //green
+            iv1.setStyle("-fx-background-color: #5FE700;");
+        } else if (percentageNW > 20 && percentageNW < 30) {
+            //yellow
+            iv1.setStyle("-fx-background-color: #E8F10B;");
+        } else if (percentageNW > 30) {
+            //red
+            iv1.setStyle("-fx-background-color: #F10B37;");
+        } else {
+            iv1.setStyle("");
+        }
+
+        if (percentageNE < 20) {
+            //green
+            iv2.setStyle("-fx-background-color: #5FE700;");
+        } else if (percentageNE > 20 && percentageNE < 30) {
+            //yellow
+            iv2.setStyle("-fx-background-color: #E8F10B;");
+        } else if (percentageNE > 30) {
+            //red
+            iv2.setStyle("-fx-background-color: #F10B37;");
+        }  else {
+            iv1.setStyle("");
+        }
+
+        if (percentageSE < 20) {
+            //green
+            iv4.setStyle("-fx-background-color: #5FE700;");
+        } else if (percentageSE > 20 && percentageSE < 30) {
+            //yellow
+            iv4.setStyle("-fx-background-color: #E8F10B;");
+        } else if (percentageSE > 30) {
+            //red
+            iv4.setStyle("-fx-background-color: #F10B37;");
+        }  else {
+            iv1.setStyle("");
+        }
+
+        if (percentageSW < 20) {
+            //green
+            iv4.setStyle("-fx-background-color: #5FE700;");
+        } else if (percentageSW > 20 && percentageSW < 30) {
+            //yellow
+            iv4.setStyle("-fx-background-color: #E8F10B;");
+        } else if (percentageSW > 30) {
+            //red
+            iv4.setStyle("-fx-background-color: #F10B37;");
+        }  else {
+            iv1.setStyle("");
+        }
     }
 
     private void handlePieChartClick(String name, List<HarvestedFishRecords> currentCountryHarvest) {

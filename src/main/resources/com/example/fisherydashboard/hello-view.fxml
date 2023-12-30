@@ -5,193 +5,236 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fisherydashboard.HelloController">
     <HBox spacing="5.0" VBox.vgrow="ALWAYS">
         <ListView fx:id="lvCountry" prefHeight="400.0" prefWidth="117.0" />
-      <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+      <VBox>
          <children>
-            <VBox prefHeight="44.0" prefWidth="100.0">
+            <VBox>
                <children>
-                  <HBox prefHeight="40.0" prefWidth="202.0">
+                  <HBox>
                      <children>
                         <Label fx:id="lblCountryTitleText" />
+                        <Region prefHeight="25.0" prefWidth="689.0" />
+                        <VBox alignment="CENTER_RIGHT">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="40.0" prefWidth="202.0" spacing="5.0">
+                                 <children>
+                                    <Button fx:id="btnReloadData" mnemonicParsing="false" text="Reload Data" />
+                                    <Button fx:id="btnRegister" mnemonicParsing="false" text="Register" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
-               </children>
-            </VBox>
-            <VBox prefHeight="124.0" prefWidth="100.0" spacing="5.0">
-               <children>
-                  <Label text="Total weight harvested in each region:">
-                     <font>
-                        <Font name="System Bold Italic" size="12.0" />
-                     </font>
-                  </Label>
-                  <HBox>
+                  <VBox>
                      <children>
-                        <Label text="North East:" />
-                        <Label fx:id="lblC1NE" />
-                     </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <Label text="North West:" />
-                        <Label fx:id="lblC1NW" />
-                     </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <Label text="South East:" />
-                        <Label fx:id="lblC1SE" />
-                     </children>
-                  </HBox>
-                  <HBox layoutX="10.0" layoutY="203.0">
-                     <children>
-                        <Label text="South West:" />
-                        <Label fx:id="lblC1SW" />
-                     </children>
-                  </HBox>
-                  <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="62.0" prefWidth="100.0" />
-               </children>
-            </VBox>
-            <VBox spacing="5.0">
-               <children>
-                  <Label text="Total weight harvested per average threshold:">
-                     <font>
-                        <Font name="System Bold Italic" size="12.0" />
-                     </font>
-                  </Label>
-                  <HBox>
-                     <children>
-                        <Label fx:id="lblC4TotalWeightTH" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-      <VBox layoutX="263.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-         <children>
-            <VBox prefHeight="44.0" prefWidth="100.0">
-               <children>
-                  <HBox prefHeight="40.0" prefWidth="202.0" />
-               </children>
-            </VBox>
-            <VBox prefHeight="124.0" prefWidth="100.0" spacing="5.0">
-               <children>
-                  <Label text="Most harvested fish specie:">
-                     <font>
-                        <Font name="System Bold Italic" size="12.0" />
-                     </font>
-                  </Label>
-                  <HBox>
-                     <children>
-                        <PieChart fx:id="pieChart" prefWidth="168.0" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox spacing="5.0">
-               <children>
-                  <Label text="Total fish harvested per regional threshold:">
-                     <font>
-                        <Font name="System Bold Italic" size="12.0" />
-                     </font>
-                  </Label>
-                  <HBox>
-                     <children>
-                        <Label text="North East:" />
-                        <Label fx:id="lblC5NE" />
-                     </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <Label text="North West:" />
-                        <Label fx:id="lblC5NW" />
-                     </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <Label text="South East:" />
-                        <Label fx:id="lblC5SE" />
-                     </children>
-                  </HBox>
-                  <HBox layoutX="10.0" layoutY="203.0">
-                     <children>
-                        <Label text="South West:" />
-                        <Label fx:id="lblC5SW" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-      <VBox layoutX="368.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-         <children>
-            <VBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="100.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="202.0" spacing="5.0">
-                     <children>
-                        <Button mnemonicParsing="false" text="Reload Data" fx:id="btnReloadData"/>
-                        <Button mnemonicParsing="false" text="Register" fx:id="btnRegister"/>
-                     </children></HBox>
-               </children>
-            </VBox>
-            <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="170.0" prefWidth="100.0" spacing="5.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="16.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Label text="Amount of ">
+                        <Label text="Overfishing region heatmap:">
                            <font>
                               <Font name="System Bold Italic" size="12.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblC3FishName" />
-                        <Label layoutX="10.0" layoutY="10.0" text=" harvested per region">
-                           <font>
-                              <Font name="System Bold Italic" size="12.0" />
-                           </font>
-                        </Label>
+                        <HBox>
+                           <children>
+                              <VBox fx:id="iv1" alignment="CENTER" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
+                                 <children>
+                                    <Label text="North West" />
+                                    <Label fx:id="lblhmNW"/>
+                                 </children></VBox>
+                              <VBox fx:id="iv2" alignment="CENTER" layoutX="10.0" layoutY="10.0" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
+                                 <children>
+                                    <Label alignment="CENTER" text="North East" />
+                                    <Label fx:id="lblhmNE" />
+                                 </children></VBox>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <VBox fx:id="iv3" alignment="CENTER" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
+                                 <children>
+                                    <Label text="South West" />
+                                    <Label fx:id="lblhmSW" />
+                                 </children></VBox>
+                              <VBox fx:id="iv4" alignment="CENTER" layoutX="10.0" layoutY="10.0" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
+                                 <children>
+                                    <Label  text="South East"/>
+                                    <Label fx:id="lblhmSE" />
+                                 </children></VBox>
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <Label text="North East:" />
-                        <Label fx:id="lblC3NE" />
-                     </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <Label text="North West:" />
-                        <Label fx:id="lblC3NW" />
-                     </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <Label text="South East:" />
-                        <Label fx:id="lblC3SE" />
-                     </children>
-                  </HBox>
-                  <HBox layoutX="10.0" layoutY="203.0">
-                     <children>
-                        <Label text="South West:" />
-                        <Label fx:id="lblC3SW" />
-                     </children>
-                  </HBox>
+                  </VBox>
                </children>
             </VBox>
-            <VBox spacing="5.0">
+            <HBox>
                <children>
-                  <Label text="Most fish harvested by following members:">
-                     <font>
-                        <Font name="System Bold Italic" size="12.0" />
-                     </font>
-                  </Label>
-                  <ListView fx:id="lvTop5Members" maxWidth="300" prefHeight="150.0" prefWidth="300" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox prefHeight="124.0" prefWidth="100.0" spacing="5.0">
+                           <children>
+                              <Label text="Total weight harvested in each region:">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox>
+                                 <children>
+                                    <Label text="North East:" />
+                                    <Label fx:id="lblC1NE" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label text="North West:" />
+                                    <Label fx:id="lblC1NW" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label text="South East:" />
+                                    <Label fx:id="lblC1SE" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="203.0">
+                                 <children>
+                                    <Label text="South West:" />
+                                    <Label fx:id="lblC1SW" />
+                                 </children>
+                              </HBox>
+                              <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="62.0" prefWidth="100.0" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Total weight harvested per average threshold:">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox>
+                                 <children>
+                                    <Label fx:id="lblC4TotalWeightTH" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox prefHeight="124.0" prefWidth="100.0" spacing="5.0">
+                           <children>
+                              <Label text="Most harvested fish specie:">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox>
+                                 <children>
+                                    <PieChart fx:id="pieChart" prefWidth="168.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Total fish harvested per regional threshold:">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox>
+                                 <children>
+                                    <Label text="North East:" />
+                                    <Label fx:id="lblC5NE" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label text="North West:" />
+                                    <Label fx:id="lblC5NW" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label text="South East:" />
+                                    <Label fx:id="lblC5SE" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="203.0">
+                                 <children>
+                                    <Label text="South West:" />
+                                    <Label fx:id="lblC5SW" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="170.0" prefWidth="100.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="16.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Amount of ">
+                                       <font>
+                                          <Font name="System Bold Italic" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblC3FishName" />
+                                    <Label layoutX="10.0" layoutY="10.0" text=" harvested per region">
+                                       <font>
+                                          <Font name="System Bold Italic" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label text="North East:" />
+                                    <Label fx:id="lblC3NE" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label text="North West:" />
+                                    <Label fx:id="lblC3NW" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label text="South East:" />
+                                    <Label fx:id="lblC3SE" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="203.0">
+                                 <children>
+                                    <Label text="South West:" />
+                                    <Label fx:id="lblC3SW" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Most fish harvested by following members:">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <ListView fx:id="lvTop5Members" maxWidth="300" prefHeight="150.0" prefWidth="300" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
          </children>
       </VBox>
     </HBox>
