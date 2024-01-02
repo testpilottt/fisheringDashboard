@@ -33,6 +33,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -120,6 +121,10 @@ public class HelloController {
     private VBox iv3;
     @FXML
     private VBox iv4;
+
+    @FXML
+    private ListView listViewWeightPerMonth;
+
     RestApiCallServiceImpl restApiCallService = new RestApiCallServiceImpl();
     List<TypeOfFish> typeOfFishDataList = new ArrayList<>();
     List<HarvestedFishRecords> harvestedFishRecordDataList = new ArrayList<>();
@@ -327,10 +332,10 @@ public class HelloController {
         Double percentageNW = (NW_TH / NW) * 100;
         Double percentageSE = (SE_TH / SE) * 100;
         Double percentageSW = (SW_TH / SW) * 100;
-        lblhmNW.setText(percentageNW + "%");
-        lblhmNE.setText(percentageNE + "%");
-        lblhmSW.setText(percentageSW + "%");
-        lblhmSE.setText(percentageSE + "%");
+        lblhmNW.setText(percentageNW.shortValue() + "%");
+        lblhmNE.setText(percentageNE.shortValue() + "%");
+        lblhmSW.setText(percentageSW.shortValue() + "%");
+        lblhmSE.setText(percentageSE.shortValue() + "%");
         if (percentageNW < 20) {
             //green
             iv1.setStyle("-fx-background-color: #5FE700;");
@@ -367,21 +372,39 @@ public class HelloController {
             //red
             iv4.setStyle("-fx-background-color: #F10B37;");
         }  else {
-            iv1.setStyle("");
+            iv4.setStyle("");
         }
 
         if (percentageSW < 20) {
             //green
-            iv4.setStyle("-fx-background-color: #5FE700;");
+            iv3.setStyle("-fx-background-color: #5FE700;");
         } else if (percentageSW > 20 && percentageSW < 30) {
             //yellow
-            iv4.setStyle("-fx-background-color: #E8F10B;");
+            iv3.setStyle("-fx-background-color: #E8F10B;");
         } else if (percentageSW > 30) {
             //red
-            iv4.setStyle("-fx-background-color: #F10B37;");
+            iv3.setStyle("-fx-background-color: #F10B37;");
         }  else {
-            iv1.setStyle("");
+            iv3.setStyle("");
         }
+
+
+        //Per Month Data
+        Map<YearMonth, List<HarvestedFishRecords>> mapMonthAndWeight = currentCountryHarvest.stream()
+                .collect(Collectors.groupingBy(p -> YearMonth.from(p.getTimeLog())));
+        List<YearMonth> sortedKeys = new ArrayList(mapMonthAndWeight.keySet());
+        Collections.sort(sortedKeys);
+        ArrayList<String> weightPerMonthList = new ArrayList<>();
+
+        sortedKeys.forEach(sk -> {
+            Double weight = mapMonthAndWeight.get(sk).stream()
+                    .map(HarvestedFishRecords::getWeightKg)
+                    .reduce(0D, Double::sum);
+            weightPerMonthList.add(sk.getMonth().name() + " " +  sk.getYear() + " - Total weight of: " + weight + "KG");
+
+        });
+
+        listViewWeightPerMonth.getItems().addAll(weightPerMonthList);
     }
 
     private void handlePieChartClick(String name, List<HarvestedFishRecords> currentCountryHarvest) {

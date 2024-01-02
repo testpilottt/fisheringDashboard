@@ -32,43 +32,61 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox>
+                  <HBox spacing="100.0">
                      <children>
-                        <Label text="Overfishing region heatmap:">
-                           <font>
-                              <Font name="System Bold Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <HBox>
+                        <VBox>
                            <children>
-                              <VBox fx:id="iv1" alignment="CENTER" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
+                              <Label text="Overfishing region heatmap:">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox>
                                  <children>
-                                    <Label text="North West" />
-                                    <Label fx:id="lblhmNW" />
-                                 </children></VBox>
-                              <VBox fx:id="iv2" alignment="CENTER" layoutX="10.0" layoutY="10.0" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
+                                    <VBox fx:id="iv1" alignment="CENTER" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
+                                       <children>
+                                          <Label text="North West" />
+                                          <Label fx:id="lblhmNW" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="iv2" alignment="CENTER" layoutX="10.0" layoutY="10.0" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
+                                       <children>
+                                          <Label alignment="CENTER" text="North East" />
+                                          <Label fx:id="lblhmNE" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox>
                                  <children>
-                                    <Label alignment="CENTER" text="North East" />
-                                    <Label fx:id="lblhmNE" />
-                                 </children></VBox>
+                                    <VBox fx:id="iv3" alignment="CENTER" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
+                                       <children>
+                                          <Label text="South West" />
+                                          <Label fx:id="lblhmSW" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="iv4" alignment="CENTER" layoutX="10.0" layoutY="10.0" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
+                                       <children>
+                                          <Label text="South East" />
+                                          <Label fx:id="lblhmSE" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
-                        <HBox>
+                        </VBox>
+                        <VBox>
                            <children>
-                              <VBox fx:id="iv3" alignment="CENTER" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
-                                 <children>
-                                    <Label text="South West" />
-                                    <Label fx:id="lblhmSW" />
-                                 </children></VBox>
-                              <VBox fx:id="iv4" alignment="CENTER" layoutX="10.0" layoutY="10.0" pickOnBounds="true" prefHeight="80.0" prefWidth="80.0">
-                                 <children>
-                                    <Label text="South East" />
-                                    <Label fx:id="lblhmSE" />
-                                 </children></VBox>
+                              <Label text="Weight per Month Harvested:">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <ListView fx:id="listViewWeightPerMonth" prefHeight="157.0" prefWidth="294.0" />
                            </children>
-                        </HBox>
+                        </VBox>
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
             </VBox>
             <HBox>
@@ -136,7 +154,7 @@
                               </Label>
                               <HBox>
                                  <children>
-                                    <PieChart fx:id="pieChart" prefHeight="400.0" prefWidth="400"/>
+                                    <PieChart fx:id="pieChart" prefHeight="400.0" prefWidth="400" />
                                  </children>
                               </HBox>
                            </children>
