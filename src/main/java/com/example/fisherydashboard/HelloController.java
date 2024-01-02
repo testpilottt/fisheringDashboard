@@ -392,6 +392,7 @@ public class HelloController {
         //Per Month Data
         Map<YearMonth, List<HarvestedFishRecords>> mapMonthAndWeight = currentCountryHarvest.stream()
                 .collect(Collectors.groupingBy(p -> YearMonth.from(p.getTimeLog())));
+
         List<YearMonth> sortedKeys = new ArrayList(mapMonthAndWeight.keySet());
         Collections.sort(sortedKeys);
         ArrayList<String> weightPerMonthList = new ArrayList<>();
@@ -403,7 +404,7 @@ public class HelloController {
             weightPerMonthList.add(sk.getMonth().name() + " " +  sk.getYear() + " - Total weight of: " + weight + "KG");
 
         });
-
+        listViewWeightPerMonth.getItems().clear();
         listViewWeightPerMonth.getItems().addAll(weightPerMonthList);
     }
 

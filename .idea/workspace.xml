@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04e36a5a-c2e0-48af-93f3-9ae209b0b96d" name="Changes" comment="Dashboard">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fisherydashboard/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fisherydashboard/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/fisherydashboard/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/fisherydashboard/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +84,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703882808250</updated>
-      <workItem from="1703882809842" duration="27176000" />
+      <workItem from="1703882809842" duration="27922000" />
     </task>
     <task id="LOCAL-00001" summary="Dashboard">
       <option name="closed" value="true" />
@@ -128,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704124426556</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Dashboard">
+      <option name="closed" value="true" />
+      <created>1704208793993</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1704208793993</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
