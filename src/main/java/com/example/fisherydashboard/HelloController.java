@@ -324,7 +324,7 @@ public class HelloController {
         ArrayList<String> top5memberNames = new ArrayList<>();
         top5MembersId.forEach(fe -> membersDataList.stream()
                 .filter(f -> f.getMemberId().equals(fe)).findFirst()
-                .ifPresent(p -> top5memberNames.add(p.getFirstName() + " " + p.getLastName() + " - Total weight harvested: " + top5Members.get(fe).getSum())));
+                .ifPresent(p -> top5memberNames.add(p.getFirstName() + " " + p.getLastName() + " - Total weight harvested: " + top5Members.get(fe).getSum() + "KG")));
         lvTop5Members.getItems().clear();
         lvTop5Members.getItems().addAll(top5memberNames);
 
